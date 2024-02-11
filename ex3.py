@@ -1,5 +1,11 @@
-import matplotlib.pyplot as pyplot
+# Group 35
+# Ex 3
 
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.optimize import curve_fit
+
+# Implementation of Bubble Sort
 def bubble_sort(a):
     n = len(a)
     global comps
@@ -18,6 +24,7 @@ def bubble_sort(a):
     print ("swaps made - ", swaps)
     return a, swaps, comps
 
+# Testing with array sizes
 totalswaps = []
 totalcompares = []
 arraylen = []
@@ -57,8 +64,29 @@ totalswaps.append (swaps)
 totalcompares.append (comps)
 arraylen.append (len(array5))
 
-pyplot.plot (arraylen, totalswaps)
-pyplot.plot (arraylen, totalcompares)
-pyplot.show()
+# Curve fitting model
+def n_squared_model(x, a, b):
+    return a * x ** 2 + b
+
+params_comparisons, _ = curve_fit(n_squared_model, arraylen, totalcompares)
+params_swaps, _ = curve_fit(n_squared_model, arraylen, totalswaps)
+
+fig, axs = plt.subplots(nrows=1, ncols=1, figsize= (9, 5))
+bubble = axs
+
+# comparisons and swaps plot 
+bubble.scatter(arraylen, totalcompares, label='Comparison Times', color= 'red')
+bubble.plot(arraylen, n_squared_model(np.array(arraylen), *params_comparisons), label= 'Comparions Fitted Line', color= 'red')
+
+bubble.scatter(arraylen, totalswaps, label='Swaps Times', color= 'blue')
+bubble.plot(arraylen, n_squared_model(np.array(arraylen), *params_swaps), label= 'Swaps Fitted Line', color= 'blue')
 
 
+bubble.set_title('Plot of Comparisons and Swaps')
+bubble.set_xlabel("Array Size")
+bubble.set_ylabel("Time (seconds)")
+
+bubble.legend()
+
+plt.tight_layout()
+plt.show()

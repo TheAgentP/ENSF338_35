@@ -1,4 +1,4 @@
-# Olamikun Aluko #
+# Group 35 #
 # Ex 2 #
 
 import random
@@ -16,14 +16,13 @@ def bubble_sort(arr):
                 arr[j] = arr[j + 1]
                 arr[j + 1] = temp
 
-
-
 # Implementation of quick_sort
 def quicksort(arr, low, high):
     if low < high:
         pivot_index = partition(arr, low, high)
         quicksort(arr, low, pivot_index)
         quicksort(arr, pivot_index + 1, high)
+        
 
 def partition(arr, low, high):
     pivot = arr[low]
