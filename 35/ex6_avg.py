@@ -1,3 +1,6 @@
+# Group 35
+# ex 6 average
+
 import matplotlib.pyplot as plt
 import random
 import time
